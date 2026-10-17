@@ -1,0 +1,1 @@
+{"statusCode":400,"message":["property demoPayments should not exist"],"error":"Bad Request","timestamp":"2026-10-17T04:43:12.017Z","path":"/api/stripe/settings"}

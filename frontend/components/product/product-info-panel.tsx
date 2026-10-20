@@ -153,17 +153,19 @@ export function ProductInfoPanel({
     <div className="space-y-5">
       <div>
         <div className="flex items-start justify-between gap-3">
-          <h1 className="text-base font-medium leading-snug text-foreground sm:text-lg">
+          <div className="min-w-0">
             {category && (
               <Link
                 href={`/search?q=${encodeURIComponent(category)}`}
-                className="mr-1.5 inline-block -translate-y-px rounded-sm bg-violet-100 px-1.5 py-0.5 align-middle text-[11px] font-semibold text-violet-700 dark:bg-violet-500/20 dark:text-violet-300"
+                className="inline-block rounded-sm bg-violet-100 px-1.5 py-0.5 text-[11px] font-semibold text-violet-700 dark:bg-violet-500/20 dark:text-violet-300"
               >
                 #{category.replace(/[^A-Za-z0-9]+/g, "")}
               </Link>
             )}
-            {listing.title}
-          </h1>
+            <h1 className="mt-1.5 text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-2xl">
+              {listing.title}
+            </h1>
+          </div>
           <Button
             variant="ghost"
             size="icon"
@@ -174,23 +176,25 @@ export function ProductInfoPanel({
             <Share2 />
           </Button>
         </div>
-        <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
           <span>
-            SKU:{" "}
+            Brand:{" "}
             <Link
               href={`/brands/${brandSlug(listing.brand)}`}
               className="hover:text-foreground hover:underline"
             >
               {listing.brand}
-            </Link>{" "}
-            · {listing.id.slice(-10)}
+            </Link>
           </span>
+          <span>SKU: {listing.id.slice(-10)}</span>
           {reviewCount > 0 && (
             <a href="#reviews" className="flex items-center gap-1.5 hover:underline">
               <span className="flex text-rating" aria-label={`${rating.toFixed(1)} out of 5`}>
                 {"★★★★★".slice(0, Math.max(1, Math.round(rating)))}
               </span>
-              <span className="text-rating">({reviewCount} Reviews)</span>
+              <span className="text-rating">
+                ({reviewCount} {reviewCount === 1 ? "review" : "reviews"})
+              </span>
             </a>
           )}
         </div>
@@ -244,7 +248,7 @@ export function ProductInfoPanel({
                     current ? "border-foreground ring-1 ring-foreground" : "border-transparent hover:border-border"
                   )}
                 >
-                  <Image src={v.images[0]!} alt="" fill unoptimized sizes="64px" className="object-cover" />
+                  <Image src={v.images[0]!} alt="" fill sizes="64px" className="object-cover" />
                 </Link>
               </li>
             );
@@ -463,7 +467,6 @@ export function ProductInfoPanel({
                           src={m.images[0]!}
                           alt={m.title}
                           fill
-                          unoptimized
                           sizes="130px"
                           className="object-cover"
                         />

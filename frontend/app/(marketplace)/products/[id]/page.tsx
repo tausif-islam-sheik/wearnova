@@ -66,10 +66,11 @@ function ProductDetail({ listing }: { listing: Listing }) {
         onReport={() => setReportOpen(true)}
       />
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-12">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12">
         <div className="min-w-0 space-y-12">
           <ProductGalleryRail images={listing.images} title={listing.title} />
           <ProductReviews reviews={reviews} loading={reviewsLoading} sellerName={seller?.name} />
+          <ProductQuestions listing={listing} />
         </div>
 
         <div className="min-w-0">
@@ -86,10 +87,6 @@ function ProductDetail({ listing }: { listing: Listing }) {
           />
         </div>
       </div>
-
-      <section className="mt-14 max-w-3xl">
-        <ProductQuestions listing={listing} />
-      </section>
 
       <ListingRow title="You may also like" listings={moreItems} loading={otherItemsLoading} />
 
